@@ -1,4 +1,4 @@
-package com.company.BinaryTreeLevelOrder;
+package com.company.BinaryTree.BinaryTreeLevelOrderTwo;
 
 import com.company.Models.TreeNode;
 
@@ -6,10 +6,9 @@ import java.util.ArrayList;
 import java.util.List;
 
 // accepted
-public class BinaryTreeLevelOrder {
+public class BinaryTreeLevelOrderTwo {
 
     private List<List<Integer>> mResult = new ArrayList<List<Integer>>();
-    private int mLevel = 1;
     public List<List<Integer>> levelOrderBottom(TreeNode root) {
         if(root == null){
             return mResult;
@@ -17,7 +16,7 @@ public class BinaryTreeLevelOrder {
 
         naviTree(root,1);
 
-        return reverseList(mResult);
+        return mResult;
     }
 
     private void naviTree(TreeNode root, int level){
@@ -45,8 +44,6 @@ public class BinaryTreeLevelOrder {
         }
 
         l.add(val);
-
-
     }
 
     private List<List<Integer>> reverseList(List<List<Integer>> l){
