@@ -1,4 +1,4 @@
-package com.company.RemoveDuliList;
+package com.company.LinkedList.RemoveDuliList;
 
 import com.company.Models.ListNode;
 
