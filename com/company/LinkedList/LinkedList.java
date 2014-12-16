@@ -59,18 +59,12 @@ public class LinkedList {
 
     public static ListNode getMiddleNode(ListNode ln){
         ListNode mid = ln;
-        boolean flag = false;
         while(ln != null){
-            ln = ln.next;
-            if(flag){
-                flag = false;
-            }else {
-                flag = true;
+            if(ln.next == null){
+                break;
             }
-
-            if(flag == false){
-                mid = mid.next;
-            }
+            ln = ln.next.next;
+            mid = mid.next;
         }
         return mid;
     }
@@ -141,11 +135,113 @@ public class LinkedList {
             tmp.next.next = mergeSortedListRec(l1, l2);
             return tmp;
         }
-
     }
 
     public static boolean hasCycle(ListNode ln){
+        ListNode slow = ln;
+        ListNode fast = ln;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){
+                return true;
+            }
+        }
         return false;
+    }
+
+    public static ListNode detectCycle(ListNode head){
+        ListNode slow = head;
+        ListNode fast = head;
+        while(fast != null && fast.next != null){
+            fast = fast.next.next;
+            slow = slow.next;
+            if(fast == slow){
+                break;
+            }
+        }
+
+        slow = head;
+        while (fast != null && fast.next != null){
+            if(fast == slow){
+                return fast;
+            }
+            fast = fast.next;
+            slow = slow.next;
+        }
+        return null;
+    }
+
+//    Given a linked list, remove the nth node from the end of list and return its head.
+//
+//    For example,
+//
+//    Given linked list: 1->2->3->4->5, and n = 2.
+//
+//    After removing the second node from the end, the linked list becomes 1->2->3->5.
+//    Note:
+//    Given n will always be valid.
+//    Try to do this in one pass.
+    public static ListNode removeNthFromEnd(ListNode head, int n){
+        if(head == null || n <= 0) return head;
+
+        ListNode oldHead = head;
+        ListNode rmNode = head;
+        int dist = 0;
+        while(head != null){
+            head = head.next;
+            if(dist < n+1){
+                dist++;
+            }else {
+                rmNode = rmNode.next;
+            }
+        }
+
+        if(dist < n){
+            return oldHead;
+        }else if(dist == n){
+            return oldHead.next;
+        }
+
+        rmNode.next = rmNode.next.next;
+        return oldHead;
+    }
+
+//    Reverse a linked list from position m to n. Do it in-place and in one-pass.
+//
+//    For example:
+//    Given 1->2->3->4->5->NULL, m = 2 and n = 4,
+//
+//    return 1->4->3->2->5->NULL.
+//
+//            Note:
+//    Given m, n satisfy the following condition:
+//            1 ≤ m ≤ n ≤ length of list.
+    public static ListNode reverseBetween(ListNode head, int m, int n){
+
+        ListNode dummy = new ListNode(0);
+        dummy.next = head;
+        ListNode p = dummy;
+        for(int i = 1; i < m; i++)
+            p = p.next;
+
+        p.next = reverse(p.next, n - m + 1);
+        return dummy.next;
+
+
+    }
+
+
+    private static ListNode reverse(ListNode head, int n){
+        ListNode node = head, prev = null, next = null;
+        for(int i = 0; i < n; i++){
+            next = node.next;
+            node.next = prev;
+            prev = node;
+            node = next;
+        }
+        head.next = node;
+        return prev;
     }
 
     private static ListNode insertListNode(ListNode dest, ListNode source){
@@ -161,6 +257,8 @@ public class LinkedList {
         dest.next.next = tmp;
         return source;
     }
+
+
 }
 
 
