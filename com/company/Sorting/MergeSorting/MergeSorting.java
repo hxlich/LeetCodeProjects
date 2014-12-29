@@ -37,6 +37,29 @@ public class MergeSorting {
         return dest;
     }
 
+    private static int [] sortSubByIndex( int[] m , int leftFrom, int leftTo, int rightFrom, int rightTo){
+        int l = leftFrom, r = rightFrom;
+        int leftLength = leftTo - leftFrom;
+        int rightLength = rightTo - rightFrom;
+        int count = leftLength + rightLength;
+        int result[] = new int[count];
+        for(int i=0; i< count ; i++){
+            if( l == leftLength){
+
+            }
+
+            if( r == rightLength){
+
+            }
+
+            if(m[l] < m[r]){
+                result[i] = m[l++];
+            }else {
+                result[i] = m[r++];
+            }
+        }
+        return m;
+    }
     private static int [] sortSub(int [] left, int [] right){
         int l = 0, r = 0;
         int [] result = new int[left.length + right.length];

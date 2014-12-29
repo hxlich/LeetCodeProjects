@@ -1,12 +1,12 @@
 package com.company;
 
-import com.company.Sorting.MergeSorting.MergeSortingTest;
+import com.company.CompareVersionNumber.CompareVersionNumbersTest;
 
 public class Main {
 
     public static void main(String[] args) {
 
-        MergeSortingTest.test();
+        CompareVersionNumbersTest.test();
 //        int [] sample = {1,2,3,4,5};
 //        ListNode s1 = LinkedList.createList(sample);
 //        LinkedList.printList(s1);
